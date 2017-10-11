@@ -1,80 +1,61 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://www.ez-khutbah.com/
 
-# johnnysteenbergen
+# ez-khutbah
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+ez-khutbah is a simple API allowing consumers to CRUD khutbahs.
 
-## Questions Collection [/questions]
+## Khutbahs Collection [api/v1/khutbah]
 
-### List All Questions [GET]
+### List All Khutbah [GET]
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "id": 10,
+                "content": "### Best khutbah to date!!!",
+                "published_at": "2017-10-10T08:40:51.620Z",
+                "tags": [
+                    "salawaat",
+                    "sunnah"
+                ],
+                "ameen": 2
+            },
+            {
+                "id": 6,
+                "content": "### Older khutbah now....",
+                "published_at": "2016-10-10T08:40:51.620Z",
+                "tags": [
+                    "tawheed"
+                ],
+                "ameen": 200
             }
         ]
 
-### Create a New Question [POST]
+### Create a New Khutbah [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+You may create your own khutbah using this action. It takes a JSON
+object containing a khutbah. Returns a JSON object containing the 
+publication datetime upon successful submission.
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
+            "content": "### New khutbah title\n\tSuper sweet khutbah here now",
+            "tags": [
+                "tawbah"
             ]
         }
 
 + Response 201 (application/json)
 
-    + Headers
-
-            Location: /questions/2
-
     + Body
 
             {
-                "question": "Favourite programming language?",
                 "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
             }
+            
+## Social interactions with Khutbah [api/v1/khutbah/:id/ameen]
+
+### Ameen a Khutbah [POST]
